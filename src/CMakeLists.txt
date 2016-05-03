@@ -76,6 +76,10 @@ set(SRC plugin-qt5.cpp ck_property.cpp)
 qt5_wrap_cpp(MOC_SRC plugin-qt5.hpp ck_property.hpp)
 add_library(${NAME} MODULE ${SRC} ${MOC_SRC})
 
+add_custom_command(TARGET ${NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E echo "Run qmlplugindump"
+  COMMAND qmlplugindump -notrelocatable org.freedesktop.contextkit 1.0 . > plugins.qmltypes)
+
 target_link_libraries(${NAME}
   ${Qt5Core_LIBRARIES}
   ${Qt5Qml_LIBRARIES}
@@ -83,6 +87,6 @@ target_link_libraries(${NAME}
   )
 
 install(PROGRAMS libcontextkit.so DESTINATION lib/qt5/qml/${QMLPKG})
-install(FILES qmldir DESTINATION lib/qt5/qml/${QMLPKG})
+install(FILES qmldir plugins.qmltypes DESTINATION lib/qt5/qml/${QMLPKG})
 
 endif(${USEQT} STREQUAL "4")

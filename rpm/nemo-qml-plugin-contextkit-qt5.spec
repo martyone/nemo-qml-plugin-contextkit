@@ -10,6 +10,7 @@ BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Qml)
 BuildRequires: pkgconfig(contextkit-statefs) >= 0.2.34
 BuildRequires: cmake >= 2.8
+BuildRequires: qt5-qtdeclarative-devel-tools
 
 %description
 %{summary}
@@ -30,3 +31,4 @@ make install DESTDIR=%{buildroot}
 %defattr(-,root,root,-)
 %{_libdir}/qt5/qml/org/freedesktop/contextkit/libcontextkit.so
 %{_libdir}/qt5/qml/org/freedesktop/contextkit/qmldir
+%{_libdir}/qt5/qml/org/freedesktop/contextkit/plugins.qmltypes
