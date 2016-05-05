@@ -78,7 +78,10 @@ add_library(${NAME} MODULE ${SRC} ${MOC_SRC})
 
 add_custom_command(TARGET ${NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E echo "Run qmlplugindump"
-  COMMAND qmlplugindump -notrelocatable org.freedesktop.contextkit 1.0 . > plugins.qmltypes)
+  COMMAND mkdir -p qml-import.tmp/org/freedesktop &&
+          ln -snf ../../../ qml-import.tmp/org/freedesktop/contextkit &&
+          env QML2_IMPORT_PATH="`pwd`/qml-import.tmp:$$QML2_IMPORT_PATH"
+              qmlplugindump -notrelocatable org.freedesktop.contextkit 1.0 > plugins.qmltypes)
 
 target_link_libraries(${NAME}
   ${Qt5Core_LIBRARIES}

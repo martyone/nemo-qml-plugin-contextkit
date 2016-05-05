@@ -10,7 +10,10 @@ BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Qml)
 BuildRequires: pkgconfig(contextkit-statefs) >= 0.2.34
 BuildRequires: cmake >= 2.8
+# qmlplugindump and its dependencies
 BuildRequires: qt5-qtdeclarative-devel-tools
+BuildRequires: qt5-plugin-platform-minimal
+BuildRequires: qt5-qtdeclarative-import-qtquick2plugin
 
 %description
 %{summary}
